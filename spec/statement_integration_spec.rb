@@ -4,7 +4,7 @@ require 'transaction'
 require 'account'
 require 'statement'
 
-RSpec.describe 'Integration' do
+RSpec.describe 'Statement integration' do
   let(:account) { Account.new }
   let(:io) { double(:io) }
 
@@ -65,7 +65,7 @@ RSpec.describe 'Integration' do
     statement.print
   end
 
-  context 'transactions are added out of date order' do
+  context 'when transactions are added out of date order' do
     xit 'prints transactions sorted by date order' do
       expect(io).to receive(:puts).with('date || credit || debit || balance').ordered
       expect(io).to receive(:puts).with('14/01/2023 || || 500.00 || 2000.00').ordered

@@ -5,5 +5,9 @@ class Account
     @transactions = []
   end
 
-  def add(transaction); end
+  attr_reader :transactions
+
+  def add(transaction)
+    @transactions << transaction
+  end
 end
