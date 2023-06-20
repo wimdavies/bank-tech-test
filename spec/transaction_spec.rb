@@ -10,19 +10,33 @@ RSpec.describe Transaction do
 
       expect(transaction.amount).to eq 100.00
       expect(transaction.date).to eq expected_date_object
-      expect(transaction.current_balance).to eq 0.0
+      expect(transaction.balance).to eq 0.0
     end
   end
 
   context '#amount_string' do
-    it 'returns correct credit string when amount is positive' do
+    it 'returns formatted credit string when amount is positive' do
       transaction = Transaction.new(100, '20-06-2023')
       expect(transaction.amount_string).to eq ' || 100.00 || || '
     end
 
-    it 'returns correct debit string when amount is negative' do
+    it 'returns formatted debit string when amount is negative' do
       transaction = Transaction.new(-100, '20-06-2023')
       expect(transaction.amount_string).to eq ' || || 100.00 || '
+    end
+  end
+
+  context '#date_string' do
+    it 'returns formatted date string' do
+      transaction = Transaction.new(100, '20-06-2023')
+      expect(transaction.date_string).to eq '20/06/2023'
+    end
+  end
+
+  context '#balance_string' do
+    it 'returns formatted balance string' do
+      transaction = Transaction.new(100, '20-06-2023')
+      expect(transaction.balance_string).to eq '0.00'
     end
   end
 end

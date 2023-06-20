@@ -6,12 +6,21 @@ class Transaction
   def initialize(amount, date)
     @amount = amount.to_f
     @date = Date.parse(date)
-    @current_balance = 0.0
+    @balance = 0.0
   end
 
-  attr_reader :amount, :date, :current_balance
+  attr_reader :amount, :date
+  attr_accessor :balance
 
   def amount_string
     @amount.positive? ? " || #{format('%.2f', @amount)} || || " : " || || #{format('%.2f', -@amount)} || "
+  end
+
+  def date_string
+    @date.strftime('%d/%m/%Y')
+  end
+
+  def balance_string
+    format('%.2f', balance)
   end
 end
