@@ -4,6 +4,8 @@ require 'date'
 
 class Transaction
   def initialize(amount, date)
+    raise 'Transaction amount cannot be zero' if amount.zero?
+
     @amount = amount.to_f
     @date = Date.parse(date)
     @balance = 0.0

@@ -12,6 +12,10 @@ RSpec.describe Transaction do
       expect(transaction.date).to eq expected_date_object
       expect(transaction.balance).to eq 0.0
     end
+
+    it 'fails when passed 0 as an amount' do
+      expect{transaction = Transaction.new(0, '20-06-2023')}.to raise_error 'Transaction amount cannot be zero'
+    end
   end
 
   context '#amount_string' do
