@@ -41,12 +41,48 @@ RSpec.describe 'Account integration' do
       account.add(transaction)
       account.calculate_balances
 
-      first_transaction = account.transactions[0]
-      expect(first_transaction.balance_string).to eq '100.00'
+      first_balance = account.transactions[-1].balance_string
+      expect(first_balance).to eq '100.00'
     end
 
-    it 'calculates and sets balances for two transactions' do
-      
+    it 'calculates and sets balances for multiple credit transactions' do
+      transaction1 = Transaction.new(100, '20-06-2023')
+      transaction2 = Transaction.new(100, '21-06-2023')
+      transaction3 = Transaction.new(100, '22-06-2023')
+      account.add(transaction1)
+      account.add(transaction2)
+      account.add(transaction3)
+
+      account.calculate_balances
+
+      first_balance = account.transactions[-1].balance_string
+      second_balance = account.transactions[-2].balance_string
+      third_balance = account.transactions[-3].balance_string
+      expect(first_balance).to eq '100.00'
+      expect(second_balance).to eq '200.00'
+      expect(third_balance).to eq '300.00'
+    end
+
+    it 'calculates and sets balances for multiple credit and debit transactions' do
+      transaction1 = Transaction.new(200, '20-06-2023')
+      transaction2 = Transaction.new(-100, '21-06-2023')
+      transaction3 = Transaction.new(100, '22-06-2023')
+      transaction4 = Transaction.new(-100, '23-06-2023')
+      account.add(transaction1)
+      account.add(transaction2)
+      account.add(transaction3)
+      account.add(transaction4)
+
+      account.calculate_balances
+
+      first_balance = account.transactions[-1].balance_string
+      second_balance = account.transactions[-2].balance_string
+      third_balance = account.transactions[-3].balance_string
+      fourth_balance = account.transactions[-4].balance_string
+      expect(first_balance).to eq '200.00'
+      expect(second_balance).to eq '100.00'
+      expect(third_balance).to eq '200.00'
+      expect(fourth_balance).to eq '100.00'
     end
   end
 end
