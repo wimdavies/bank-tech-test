@@ -27,11 +27,11 @@ RSpec.describe 'Statement integration' do
     statement.print
   end
 
-  xit 'prints a statement of only credits' do
+  it 'prints a statement of only credits' do
     expect(io).to receive(:puts).with('date || credit || debit || balance').ordered
-    expect(io).to receive(:puts).with('14/01/2023 || 100.00 || || 300.00').ordered
-    expect(io).to receive(:puts).with('13/01/2023 || 100.00 || || 200.00').ordered
-    expect(io).to receive(:puts).with('10/01/2023 || 100.00 || || 100.00').ordered
+    expect(io).to receive(:puts).with('22/06/2023 || 100.00 || || 300.00').ordered
+    expect(io).to receive(:puts).with('21/06/2023 || 100.00 || || 200.00').ordered
+    expect(io).to receive(:puts).with('20/06/2023 || 100.00 || || 100.00').ordered
 
     transaction1 = Transaction.new(100, '20-06-2023')
     transaction2 = Transaction.new(100, '21-06-2023')
@@ -46,7 +46,7 @@ RSpec.describe 'Statement integration' do
     statement.print
   end
 
-  xit 'prints a statement of only debits, with negative balances' do
+  it 'prints a statement of only debits, with negative balances' do
     expect(io).to receive(:puts).with('date || credit || debit || balance').ordered
     expect(io).to receive(:puts).with('12/01/2023 || || 100.00 || -300.00').ordered
     expect(io).to receive(:puts).with('11/01/2023 || || 100.00 || -200.00').ordered
@@ -66,7 +66,7 @@ RSpec.describe 'Statement integration' do
   end
 
   context 'when transactions are added out of date order' do
-    xit 'prints transactions sorted by date order' do
+    it 'prints transactions sorted by date order' do
       expect(io).to receive(:puts).with('date || credit || debit || balance').ordered
       expect(io).to receive(:puts).with('14/01/2023 || || 500.00 || 2000.00').ordered
       expect(io).to receive(:puts).with('13/01/2023 || 2000.00 || || 2500.00').ordered
