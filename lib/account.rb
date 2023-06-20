@@ -8,6 +8,10 @@ class Account
   attr_reader :transactions
 
   def add(transaction)
-    @transactions << transaction
+    @transactions.push(transaction).sort_by!(&:date).reverse!
+  end
+
+  def calculate_balances
+    @transactions[0].balance = @transactions[0].amount
   end
 end
