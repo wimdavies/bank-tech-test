@@ -24,7 +24,7 @@ RSpec.describe 'Statement integration' do
     account.add(transaction3)
 
     statement = Statement.new(account, io)
-    statement.print
+    statement.print_statement
   end
 
   it 'prints a statement of only credits' do
@@ -43,7 +43,7 @@ RSpec.describe 'Statement integration' do
     account.add(transaction3)
 
     statement = Statement.new(account, io)
-    statement.print
+    statement.print_statement
   end
 
   it 'prints a statement of only debits, with negative balances' do
@@ -62,7 +62,7 @@ RSpec.describe 'Statement integration' do
     account.add(transaction3)
 
     statement = Statement.new(account, io)
-    statement.print
+    statement.print_statement
   end
 
   context 'when transactions are added out of date order' do
@@ -82,7 +82,7 @@ RSpec.describe 'Statement integration' do
       account.add(transaction3)
 
       statement = Statement.new(account, io)
-      statement.print
+      statement.print_statement
     end
   end
 end

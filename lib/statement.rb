@@ -6,7 +6,7 @@ class Statement
     @io = io
   end
 
-  def print
+  def print_statement
     @account.calculate_balances
     @io.puts 'date || credit || debit || balance'
     @account.transactions.each do |transaction|
