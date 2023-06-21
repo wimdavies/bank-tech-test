@@ -1,0 +1,15 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - spec/spec_helper.rb
+    - Gemfile
+    - Gemfile.lock
+    - lib/scratchpad.rb
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+Layout/LineLength:
+  Exclude:
+    - spec/**/*

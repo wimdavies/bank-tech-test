@@ -70,3 +70,5 @@ A screenshot of this in action, using a scratch Ruby file rather than the REPL:
 ## My approach
 
 <img src="images/paper_diagram.jpg" alt="Photo of my working diagram on paper" height="400"/>
+
+<img src="images/diagram.jpg" alt="My final diagram in Excalidraw" height="400"/>
