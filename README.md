@@ -46,6 +46,8 @@ Run:
 rspec
 ```
 
+You'll see that all tests are passing, with 100% test coverage. If you run `rubocop` you'll see that I have no RuboCop offences, _pace_ the configuration changes I have made in `.rubocop.yml` (mainly to exempt the spec files).
+
 ### To run the project
 
 Open an `irb` session, requiring in the three Ruby files in `./lib`. Use instances of the classes, as in the below example, to see the program meeting the acceptance criteria:
@@ -61,7 +63,7 @@ account.add(transaction2)
 account.add(transaction3)
 
 statement = Statement.new(account, $stdout)
-statement.print
+statement.print_statement
 ```
 
 A screenshot of this in action, using a scratch Ruby file rather than the REPL:
