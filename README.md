@@ -67,6 +67,7 @@ statement.print_statement
 ```
 
 A screenshot of this in action, using a scratch Ruby file rather than the REPL:
+
 <img src="images/bank_tech_test_running.png" alt="Screenshot of the above code example running, printing a statement to the console" height="400"/>
 
 ## My approach
