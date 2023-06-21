@@ -71,6 +71,22 @@ A screenshot of this in action, using a scratch Ruby file rather than the REPL:
 
 ## My approach
 
+First, I made some notes on the requirements and acceptability criteria, drawing out features such as the sorting of transactions by descending date order and the formatting of amounts.
+In my design approach, I was keen to practice single-responsibility, and so early on I began working towards a three-class program design. I find I draft more fluidly on paper; here's a photo of my paper diagram, which as you can see went through several revisions as I designed upwards from the `Transaction` class and thought of some more elegant solutions:
+
 <img src="images/paper_diagram.jpg" alt="Photo of my working diagram on paper" height="400"/>
 
+Here's an Excalidraw diagram of the final design:
+
 <img src="images/diagram.png" alt="My final diagram in Excalidraw" width="600"/>
+
+I made some decisions early on that affected the outward growth of the program. Of note:
+- choosing to take the deposit/withdrawal acceptance criteria somewhat at face value, and that therefore a `Transaction` would take an amount and a date string as arguments
+- having an `Account` that holds an array of `Transaction` instances
+- `Account` performing balance calculations and updating its `Transaction`s accordingly
+
+Areas for improvement:
+- I am not convinced that `Account#calculate_balances` is the best solution, since it modifies instance variables rather than returning something
+- While I like the flexibility that the current `Transaction` date solution offers, the 'strictness' of binding each new `Transaction` to a `Date.now` might be a better constraint on user behaviour (depending on the envisaged context)
+
+Thanks for reading! I would welcome feedback.
