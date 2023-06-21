@@ -89,5 +89,6 @@ I made some decisions early on that affected the outward growth of the program. 
 Areas for improvement:
 - I am not convinced that `Account#calculate_balances` is the best solution, since it modifies instance variables rather than returning something
 - While I like the flexibility that the current `Transaction` date solution offers, the 'strictness' of binding each new `Transaction` to a `Date.now` might be a better constraint on user behaviour (depending on the envisaged context)
+- In my TDD process, I emphasised integration testing over unit testing (with the exception of the `Transaction` class). I could certainly write more unit tests that mock parent classes' dependencies on their children
 
 Thanks for reading! I would welcome feedback.
