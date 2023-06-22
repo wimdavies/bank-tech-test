@@ -104,7 +104,6 @@ RSpec.describe 'Account integration' do
       account.add(transaction2)
       account.add(transaction3)
       account.add(transaction4)
-
       account.calculate_balances
 
       first_balance = account.transactions[-1].balance_string
