@@ -6,7 +6,7 @@ require 'statement'
 
 RSpec.describe 'Statement integration' do
   let(:account) { Account.new }
-  let(:io) { double(:io) }
+  let(:io) { instance_double(IO) }
 
   it 'prints the statement that satisfies the acceptance criteria' do
     expect(io).to receive(:puts).with('date || credit || debit || balance').ordered
