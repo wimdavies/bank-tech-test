@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'date'
+require 'time'
 
 class Transaction
-  def initialize(amount, date)
+  def initialize(amount)
     raise 'Transaction amount cannot be zero' if amount.zero?
 
     @amount = amount.to_f
-    @date = Date.parse(date)
+    @date = Time.now
     @balance = 0.0
   end
 
