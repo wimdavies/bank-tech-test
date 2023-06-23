@@ -23,10 +23,14 @@ RSpec.describe Statement do
       allow(account).to receive(:calculate_balances).and_return([2500.0, 3000.0, 1000.0])
       allow(account).to receive(:transactions).and_return([transaction3, transaction2, transaction1])
 
-      expect(io).to receive(:puts).with('date || credit || debit || balance')
-      expect(io).to receive(:puts).with('14/01/2023 || || 500.00 || 2500.00')
-      expect(io).to receive(:puts).with('13/01/2023 || 2000.00 || || 3000.00')
-      expect(io).to receive(:puts).with('10/01/2023 || 1000.00 || || 1000.00')
+      output = <<~STATEMENT
+        date || credit || debit || balance
+        14/01/2023 || || 500.00 || 2500.00
+        13/01/2023 || 2000.00 || || 3000.00
+        10/01/2023 || 1000.00 || || 1000.00
+      STATEMENT
+
+      expect(io).to receive(:puts).with(output)
 
       statement.print_statement
     end
