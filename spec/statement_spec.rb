@@ -5,7 +5,7 @@ require 'statement'
 RSpec.describe Statement do
   let(:account) { instance_double(Account) }
   let(:io) { instance_double(IO) }
-  let(:statement) { Statement.new(account, io) }
+  let(:statement) { described_class.new(account, io) }
 
   context '#initialize' do
     it 'assigns the account and io instance variables' do
