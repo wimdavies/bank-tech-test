@@ -16,11 +16,11 @@ RSpec.describe Statement do
 
   context '#print_statement' do
     it 'prints the statement with correct formatting' do
-      transaction3 = instance_double(Transaction, date_string: '14/01/2023', amount_string: ' || || 500.00 || ', balance_string: '2500.00')
-      transaction2 = instance_double(Transaction, date_string: '13/01/2023', amount_string: ' || 2000.00 || || ', balance_string: '3000.00')
-      transaction1 = instance_double(Transaction, date_string: '10/01/2023', amount_string: ' || 1000.00 || || ', balance_string: '1000.00')
+      transaction3 = instance_double(Transaction, date_string: '14/01/2023', amount_string: ' || || 500.00 || ')
+      transaction2 = instance_double(Transaction, date_string: '13/01/2023', amount_string: ' || 2000.00 || || ')
+      transaction1 = instance_double(Transaction, date_string: '10/01/2023', amount_string: ' || 1000.00 || || ')
 
-      allow(account).to receive(:calculate_balances)
+      allow(account).to receive(:calculate_balances).and_return([2500.0, 3000.0, 1000.0])
       allow(account).to receive(:transactions).and_return([transaction3, transaction2, transaction1])
 
       expect(io).to receive(:puts).with('date || credit || debit || balance')

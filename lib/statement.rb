@@ -7,10 +7,10 @@ class Statement
   end
 
   def print_statement
-    @account.calculate_balances
+    balances = @account.calculate_balances
     @io.puts 'date || credit || debit || balance'
-    @account.transactions.each do |transaction|
-      @io.puts transaction.date_string + transaction.amount_string + transaction.balance_string
+    @account.transactions.each_with_index do |transaction, index|
+      @io.puts transaction.date_string + transaction.amount_string + format('%.2f', balances[index])
     end
   end
 end
