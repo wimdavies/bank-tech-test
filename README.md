@@ -100,9 +100,6 @@ Thanks for reading! I would welcome feedback.
 Since receiving feedback on my first submission, I have made the following revisions to my program:
 
 * `Statement` now has meaningful unit testing
-
 * `Transaction` now initalizes with `Time.now`, so the date is assigned automatically. This is mocked correctly throughout the test suites
-
 * `Account#calculate_balances` now returns an ordered array of balances, which is integrated with the matching transaction data by `Statement`
-
 * The logic and output of `Statement#print_statement` are now separate. The logic has been extracted into a private `build_statement` method, the single string return of which is `puts`ed by `print_statement`
