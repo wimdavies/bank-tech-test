@@ -50,12 +50,12 @@ You'll see that all tests are passing, with 100% test coverage. If you run `rubo
 
 ### To run the project
 
-Open an `irb` session, requiring in the three Ruby files in `./lib`. Use instances of the classes, as in the below example, to see the program meeting the acceptance criteria:
+Open an `irb` session, requiring in the three Ruby files in `./lib`. Use instances of the classes, as in the below example, to see the program meeting an analogous scenario to the acceptance criteria:
 
 ```ruby
-transaction1 = Transaction.new(1000, '10-01-2023')
-transaction2 = Transaction.new(2000, '13-01-2023')
-transaction3 = Transaction.new(-500, '14-01-2023')
+transaction1 = Transaction.new(1000)
+transaction2 = Transaction.new(2000)
+transaction3 = Transaction.new(-500)
 
 account = Account.new
 account.add(transaction1)
@@ -73,22 +73,36 @@ A screenshot of this in action, using a scratch Ruby file rather than the REPL:
 ## My approach
 
 First, I made some notes on the requirements and acceptability criteria, drawing out features such as the sorting of transactions by descending date order and the formatting of amounts.
-In my design approach, I was keen to practice single-responsibility, and so early on I began working towards a three-class program design. I find I draft more fluidly on paper; here's a photo of my paper diagram, which as you can see went through several revisions as I designed upwards from the `Transaction` class and thought of some more elegant solutions:
+In my design approach, I was keen to practise strong separation of concerns, and so early on I began working towards a three-class program design. I find I draft more fluidly on paper; here's a photo of my paper diagram, which as you can see went through several revisions as I designed upwards from the `Transaction` class and thought of some more elegant solutions:
 
 <img src="images/paper_diagram.jpg" alt="Photo of my working diagram on paper" height="400"/>
 
-Here's an Excalidraw diagram of the final design:
+Here's an Excalidraw diagram of the final design (_NB_ some aspects now outdated due to revisions detailed below in 'Update' section):
 
 <img src="images/diagram.png" alt="My final diagram in Excalidraw" width="600"/>
 
 I made some decisions early on that affected the outward growth of the program. Of note:
-- choosing to take the deposit/withdrawal acceptance criteria somewhat at face value, and that therefore a `Transaction` would take an amount and a date string as arguments
-- having an `Account` that holds an array of `Transaction` instances
-- `Account` performing balance calculations and updating its `Transaction`s accordingly
+
+* choosing to take the deposit/withdrawal acceptance criteria somewhat at face value, and that therefore a `Transaction` would take an amount and a date string as arguments
+* having an `Account` that holds an array of `Transaction` instances
+* `Account` performing balance calculations and updating its `Transaction`s accordingly
 
 Areas for improvement:
-- I am not convinced that `Account#calculate_balances` is the best solution, since it modifies instance variables rather than returning something
-- While I like the flexibility that the current `Transaction` date solution offers, the 'strictness' of binding each new `Transaction` to a `Date.now` might be a better constraint on user behaviour (depending on the envisaged context)
-- In my TDD process, I emphasised integration testing over unit testing (with the exception of the `Transaction` class). I could certainly write more unit tests that mock parent classes' dependencies on their children
+
+* I am not convinced that `Account#calculate_balances` is the best solution, since it modifies instance variables rather than returning something
+* While I like the flexibility that the current `Transaction` date solution offers, the 'strictness' of binding each new `Transaction` to a `Date.now` might be a better constraint on user behaviour (depending on the envisaged context)
+* In my TDD process, I emphasised integration testing over unit testing (with the exception of the `Transaction` class). I could certainly write more unit tests that mock parent classes' dependencies on their children
 
 Thanks for reading! I would welcome feedback.
+
+### Update
+
+Since receiving feedback on my first submission, I have made the following revisions to my program:
+
+* `Statement` now has meaningful unit testing
+
+* `Transaction` now initalizes with `Time.now`, so the date is assigned automatically. This is mocked correctly throughout the test suites
+
+* `Account#calculate_balances` now returns an ordered array of balances, which is integrated with the matching transaction data by `Statement`
+
+* The logic and output of `Statement#print_statement` are now separate. The logic has been extracted into a private `build_statement` method, the single string return of which is `puts`ed by `print_statement`
