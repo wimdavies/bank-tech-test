@@ -48,16 +48,13 @@ RSpec.describe 'Account integration' do
   end
 
   context 'Account#calculate_balances' do
-    it 'sets the balance of the first transaction correctly' do
+    it 'returns the balance of the first transaction correctly' do
       transaction = Transaction.new(100)
       account.add(transaction)
-      account.calculate_balances
-
-      first_balance = account.transactions[-1].balance_string
-      expect(first_balance).to eq '100.00'
+      expect(account.calculate_balances).to eq [100.0]
     end
 
-    it 'calculates and sets balances for multiple credit transactions' do
+    it 'returns orderded balances for multiple credit transactions' do
       time1 = Time.new(2023, 6, 20)
       allow(Time).to receive(:now).and_return(time1)
       transaction1 = Transaction.new(100)
@@ -73,17 +70,10 @@ RSpec.describe 'Account integration' do
       account.add(transaction1)
       account.add(transaction2)
       account.add(transaction3)
-      account.calculate_balances
-
-      first_balance = account.transactions[-1].balance_string
-      second_balance = account.transactions[-2].balance_string
-      third_balance = account.transactions[-3].balance_string
-      expect(first_balance).to eq '100.00'
-      expect(second_balance).to eq '200.00'
-      expect(third_balance).to eq '300.00'
+      expect(account.calculate_balances).to eq [300.0, 200.0, 100.0]
     end
 
-    it 'calculates and sets balances for multiple credit and debit transactions' do
+    it 'returns ordered balances for multiple credit and debit transactions' do
       time1 = Time.new(2023, 6, 20)
       allow(Time).to receive(:now).and_return(time1)
       transaction1 = Transaction.new(200)
@@ -104,16 +94,7 @@ RSpec.describe 'Account integration' do
       account.add(transaction2)
       account.add(transaction3)
       account.add(transaction4)
-      account.calculate_balances
-
-      first_balance = account.transactions[-1].balance_string
-      second_balance = account.transactions[-2].balance_string
-      third_balance = account.transactions[-3].balance_string
-      fourth_balance = account.transactions[-4].balance_string
-      expect(first_balance).to eq '200.00'
-      expect(second_balance).to eq '100.00'
-      expect(third_balance).to eq '200.00'
-      expect(fourth_balance).to eq '100.00'
+      expect(account.calculate_balances).to eq [100.0, 200.0, 100.0, 200.0]
     end
   end
 end

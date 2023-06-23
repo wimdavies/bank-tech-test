@@ -12,11 +12,14 @@ class Account
   end
 
   def calculate_balances
+    balances = []
     running_balance = 0.0
 
     @transactions.reverse_each do |transaction|
       running_balance += transaction.amount
-      transaction.balance += running_balance
+      balances << running_balance
     end
+
+    balances.reverse
   end
 end
