@@ -8,7 +8,6 @@ class Transaction
 
     @amount = amount.to_f
     @date = Time.now
-    @balance = 0.0
   end
 
   attr_reader :amount, :date
@@ -20,9 +19,5 @@ class Transaction
 
   def date_string
     @date.strftime('%d/%m/%Y')
-  end
-
-  def balance_string
-    format('%.2f', balance)
   end
 end
